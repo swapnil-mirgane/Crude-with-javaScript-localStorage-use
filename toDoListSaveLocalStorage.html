@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label{
+        
+            margin-right: 145px;
+           
+        }
+        table{
+            width: 70%;
+        
+        }
+    </style>
+</head>
+<label for="1">name</label><label for="2">middale name</label><label for="3">last name</label><label for="4">address</label><label for="5"> number</label>
+<br>
+<input type="text" id="1" autofocus >
+<input type="text" id="2" >
+<input type="text" id="3" >
+<input type="text" id="4" >
+<input type="number" id="5" ><br>
+<input type="submit" value="save" onclick="save()" id="6">
+<input type="button" name="" id="7" value="update" onclick="update()">
+<!-- <button type="submit" onclick="save()">save</button> -->
+<br>
+<br>
+<input type="number" id="search">
+<button type="button" onclick="edit()">edit</button>
+<div id="add">
+    <table id="tabl1" frame="box" rules="all" cellpadding="10px">
+        <tr><th>ID</th><th>Name</th><th>middaleName</th><th>lastName</th><th>address</th><th>number</th></tr>
+
+    </table>
+
+</div>
+<body>
+    <script>
+var up=document.getElementById("7");
+up.style="visibility: hidden";
+        count=1;
+        function save(){
+            var a=document.getElementById("1").value;
+        var b=document.getElementById("2").value;
+        var c=document.getElementById("3").value;
+        var d=document.getElementById("4").value;
+        var e=document.getElementById("5").value;
+     
+             id= count++;
+console.log(a,b,c,d,e);
+var table=document.getElementById("tabl1");
+
+table.innerHTML+=`<tr id="${id}"><td>${id}</td><td>${a}</td> <td>${b}</td><td>${c}</td><td>${d}</td><td>${e}</td><td><button onclick="del()" >del</button></td></tr>`;
+localStorage.setItem(id,[a,b,c,d,e]);
+document.getElementById("1").value="";
+document.getElementById("2").value="";
+document.getElementById("3").value="";
+document.getElementById("4").value="";
+document.getElementById("5").value="";
+
+// localStorage.clear();
+        }
+
+    
+function del(){
+var a=document.getElementById("tabl1").lastElementChild.remove();
+console.log(a);
+
+}
+   
+    function edit(){
+
+        var a=document.getElementById("search").value;
+        if(a==""){
+            alert("plese enter somthing");
+        }else{
+        console.log([a]);
+        up.style=" visibility: visible";
+       var x= localStorage.getItem(a);
+       var y=x.split(",");
+
+
+       document.getElementById("1").value=y[0];
+document.getElementById("2").value=y[1];
+document.getElementById("3").value=y[2];
+document.getElementById("4").value=y[3];
+document.getElementById("5").value=y[4];
+
+        }
+    }
+
+    function update(){
+        var x=document.getElementById("search").value;
+        var a=document.getElementById("1").value;
+        var b=document.getElementById("2").value;
+        var c=document.getElementById("3").value;
+        var d=document.getElementById("4").value;
+        var e=document.getElementById("5").value;
+     
+        var id= count++;
+console.log(a,b,c,d,e);
+localStorage.setItem(x,[a,b,c,d,e]);
+document.getElementById("1").value="";
+document.getElementById("2").value="";
+document.getElementById("3").value="";
+document.getElementById("4").value="";
+document.getElementById("5").value="";
+var up=document.getElementById("7");
+up.style="visibility: hidden";
+
+    }
+
+    </script>
+
+</body>
+</html>
